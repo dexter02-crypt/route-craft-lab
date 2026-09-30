@@ -28,5 +28,7 @@ test('invalid weights cannot create negative-cost shortcuts', () => { for (const
     assert.throws(() => validateMap(map(2, 2, [1, 1, 1, v]))); });
 test('invalid dimensions, versions, and blocked endpoints refused', () => { for (const m of [null, { ...makeMap(), version: 2 }, { ...makeMap(), width: 100 }, map(2, 2, [0, 1, 1, 1]), map(2, 2, [1, 1, 1])])
     assert.throws(() => validateMap(m)); });
+test('BFS minimizes steps even when route cost is higher', () => { const m = map(4, 3, Array(12).fill(1), 4, 7); m.cells[5] = m.cells[6] = 6; const cheap = search(m, 'astar'), few = search(m, 'bfs'); assert.ok(few.path.length < cheap.path.length); assert.ok(few.cost > cheap.cost); });
+test('BFS and weighted search agree on empty unweighted map', () => { const m = makeMap('empty'); assert.equal(search(m, 'bfs').path.length, search(m, 'astar').path.length); });
 test('unknown algorithms and presets refused', () => { assert.throws(() => search(makeMap(), 'greedy')); assert.throws(() => makeMap('other')); });
 test('ties resolve deterministically', () => assert.deepEqual(search(makeMap('empty')), search(makeMap('empty'))));

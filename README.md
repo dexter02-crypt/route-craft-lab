@@ -1,6 +1,6 @@
 # Route Craft
 
-Paint a warehouse. Compare two search strategies. Watch the route emerge.
+Paint a warehouse. Compare cost-optimal routing with fewest-step routing. Watch the route emerge.
 
 ![Application preview](docs/demo.png)
 
@@ -16,12 +16,12 @@ The read-only server chooses a free `127.0.0.1` port and opens the application. 
 
 ## Use it
 
-Choose a map and press **Compare routes**. Both searches run on the same map; choose A* or Dijkstra to animate its expanded cells. **Show result** completes the animation immediately. Paint by dragging. Use the tool selector to move the start/goal or add costs. The preset **Cheapest ≠ shortest** demonstrates a weighted detour. Export and import your map as JSON.
+Choose a map and press **Compare routes**. A*, Dijkstra, and BFS run on the same map; choose one to animate its expanded cells. A* and Dijkstra minimize entry cost while BFS minimizes the number of grid moves. **Show result** completes the animation immediately. Paint by dragging. Use the tool selector to move the start/goal or add costs. The preset **Cheapest ≠ shortest** demonstrates a weighted detour. Export and import your map as JSON.
 
 Keyboard: focus a cell, use arrow keys, then Enter/Space to paint. Reduced-motion preference skips the animation.
 
 ## Algorithm contract
-Four orthogonal neighbours only. Zero means an impassable wall. Walkable entry costs are 1, 3, or 6; the starting cell costs zero. A* uses Manhattan distance with a minimum edge cost of 1. Dijkstra uses zero heuristic. The priority queue resolves equal priorities deterministically. The closed-cell list counts expanded cells, not elapsed CPU time. Bounds: 48 × 32 cells. Start and goal may be equal.
+Four orthogonal neighbours only. Zero means an impassable wall. Walkable entry costs are 1, 3, or 6; the starting cell costs zero. A* uses Manhattan distance with a minimum edge cost of 1. Dijkstra uses zero heuristic. BFS ignores weights while choosing a route, then reports the actual entry cost of the route it selected. The priority queue resolves equal priorities deterministically. The closed-cell list counts expanded cells, not elapsed CPU time. Bounds: 48 × 32 cells. Start and goal may be equal.
 
 This is one start-to-goal search, not multi-stop vehicle routing, traffic prediction, or a warehouse digital twin. Changing a cell clears old results.
 

@@ -1,7 +1,7 @@
 import { search, makeMap, validateMap } from './core.js';
 import { $, status, safeAction, jsonDownload, readText } from './ui.js';
 let map = makeMap(), results = null, ticket = 0, paint = false, buttons = [], focusIndex = 0;
-function invalidate() { ticket++; results = null; for (const id of ['a-cost', 'd-cost', 'a-visited', 'd-visited'])
+function invalidate() { ticket++; results = null; for (const id of ['a-cost', 'd-cost', 'b-cost', 'a-visited', 'd-visited', 'b-steps'])
     $(id).textContent = '—'; }
 function render() {
     const grid = $('grid');
@@ -51,7 +51,7 @@ else if (e.key === 'Enter' || e.key === ' ') {
 }
 else
     return; e.preventDefault(); focusIndex = i; buttons.forEach((x, j) => x.tabIndex = i === j ? 0 : -1); buttons[i].focus(); });
-function resultStatus(r) { status(r.found ? `Route found: ${r.path.length - 1} steps, entry cost ${r.cost}. ${r.visited.length} expanded cells.` : 'No route exists on this map. The obstacle barrier was not crossed.', r.found ? 'success' : ''); }
+function resultStatus(r) { const detail = r.algorithm === 'bfs' ? `Fewest-step route: ${r.path.length - 1} steps, resulting entry cost ${r.cost}. ${r.visited.length} expanded cells.` : `Cost-optimal route: ${r.path.length - 1} steps, entry cost ${r.cost}. ${r.visited.length} expanded cells.`; status(r.found ? detail : 'No route exists on this map. The obstacle barrier was not crossed.', r.found ? 'success' : ''); }
 function animate() { if (!results)
     return; const r = results[$('algorithm').value], id = ++ticket; let k = 0; const step = () => { if (id !== ticket)
     return; k += +$('speed').value; draw(r.visited.slice(0, k)); if (k < r.visited.length)
@@ -65,7 +65,7 @@ else {
 }
 else
     step(); }
-$('run').onclick = safeAction(() => { results = { astar: search(map, 'astar'), dijkstra: search(map, 'dijkstra') }; const a = results.astar, d = results.dijkstra; $('a-cost').textContent = a.cost ?? 'No path'; $('d-cost').textContent = d.cost ?? 'No path'; $('a-visited').textContent = a.visited.length; $('d-visited').textContent = d.visited.length; status('Animating explored cells…'); animate(); });
+$('run').onclick = safeAction(() => { results = { astar: search(map, 'astar'), dijkstra: search(map, 'dijkstra'), bfs: search(map, 'bfs') }; const a = results.astar, d = results.dijkstra, b = results.bfs; $('a-cost').textContent = a.cost ?? 'No path'; $('d-cost').textContent = d.cost ?? 'No path'; $('b-cost').textContent = b.cost ?? 'No path'; $('a-visited').textContent = a.visited.length; $('d-visited').textContent = d.visited.length; $('b-steps').textContent = b.found ? b.path.length - 1 : 'No path'; status('Animating explored cells…'); animate(); });
 $('algorithm').onchange = animate;
 $('finish').onclick = () => { if (!results)
     return; ticket++; const r = results[$('algorithm').value]; draw(r.visited, r.path); resultStatus(r); };

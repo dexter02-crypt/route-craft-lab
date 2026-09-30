@@ -45,9 +45,30 @@ class Heap {
 }
 export function search(raw, algorithm = 'astar') {
     const m = validateMap(raw);
-    if (!['astar', 'dijkstra'].includes(algorithm))
+    if (!['astar', 'dijkstra', 'bfs'].includes(algorithm))
         throw new Error('Unknown algorithm.');
     const { width: w, height: h, start, goal, cells } = m, n = w * h;
+    if (algorithm === 'bfs') {
+        const parent = new Int32Array(n).fill(-1), seen = new Uint8Array(n), visited = [], queue = [start];
+        seen[start] = 1;
+        for (let head = 0; head < queue.length; head++) {
+            const u = queue[head]; visited.push(u);
+            if (u === goal) {
+                const path = [];
+                for (let p = goal; p !== -1; p = parent[p]) path.push(p);
+                path.reverse();
+                const cost = path.slice(1).reduce((sum, i) => sum + cells[i], 0);
+                return { found: true, cost, path, visited, algorithm };
+            }
+            const x = u % w, y = Math.floor(u / w), neighbors = [];
+            if (x > 0) neighbors.push(u - 1);
+            if (x + 1 < w) neighbors.push(u + 1);
+            if (y > 0) neighbors.push(u - w);
+            if (y + 1 < h) neighbors.push(u + w);
+            for (const v of neighbors) if (cells[v] && !seen[v]) { seen[v] = 1; parent[v] = u; queue.push(v); }
+        }
+        return { found: false, cost: null, path: [], visited, algorithm };
+    }
     const distance = new Float64Array(n).fill(Infinity), parent = new Int32Array(n).fill(-1), closed = new Uint8Array(n), visited = [], heap = new Heap();
     const heuristic = i => algorithm === 'astar' ? Math.abs(i % w - goal % w) + Math.abs(Math.floor(i / w) - Math.floor(goal / w)) : 0;
     distance[start] = 0;
