@@ -4,6 +4,10 @@ Paint a weighted grid and compare A*, Dijkstra, bidirectional Dijkstra and BFS.
 
 **Live demo:** https://dexter02-crypt.github.io/route-craft-lab/
 
+**Release:** [v1.2.0](https://github.com/dexter02-crypt/route-craft-lab/releases/tag/v1.2.0)
+
+![Route Craft A*, Dijkstra, bidirectional Dijkstra and BFS comparison](docs/demo.png)
+
 ## v1.2
 
 - A* and Dijkstra cost-optimal searches
