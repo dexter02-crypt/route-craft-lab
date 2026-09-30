@@ -2,105 +2,159 @@ TAP version 13
 # Subtest: empty map shortest entry cost
 ok 1 - empty map shortest entry cost
   ---
-  duration_ms: 1.219456
+  duration_ms: 2.881498
   type: 'test'
   ...
-# Subtest: start already at goal costs zero
-ok 2 - start already at goal costs zero
+# Subtest: start already at goal costs zero for all weighted searches
+ok 2 - start already at goal costs zero for all weighted searches
   ---
-  duration_ms: 0.214214
+  duration_ms: 0.39775
   type: 'test'
   ...
 # Subtest: unreachable route explicitly returns null cost
 ok 3 - unreachable route explicitly returns null cost
   ---
-  duration_ms: 0.87215
+  duration_ms: 0.952668
   type: 'test'
   ...
 # Subtest: cheapest route is not always fewest moves
 ok 4 - cheapest route is not always fewest moves
   ---
-  duration_ms: 0.156607
+  duration_ms: 0.362086
   type: 'test'
   ...
 # Subtest: entry cost of goal is paid
 ok 5 - entry cost of goal is paid
   ---
-  duration_ms: 0.112591
+  duration_ms: 0.316307
   type: 'test'
   ...
 # Subtest: wall never appears in a path
 ok 6 - wall never appears in a path
   ---
-  duration_ms: 1.402082
+  duration_ms: 2.174351
   type: 'test'
   ...
-# Subtest: consecutive path cells share one grid edge
-ok 7 - consecutive path cells share one grid edge
+# Subtest: 4-way consecutive path cells share one edge
+ok 7 - 4-way consecutive path cells share one edge
   ---
-  duration_ms: 0.922967
+  duration_ms: 1.661116
   type: 'test'
   ...
 # Subtest: sum of path entry costs equals reported cost
 ok 8 - sum of path entry costs equals reported cost
   ---
-  duration_ms: 1.352477
+  duration_ms: 1.905105
   type: 'test'
   ...
 # Subtest: search does not mutate map
 ok 9 - search does not mutate map
   ---
-  duration_ms: 1.170802
+  duration_ms: 1.492802
   type: 'test'
   ...
-# Subtest: both algorithms agree on warehouse and detour
-ok 10 - both algorithms agree on warehouse and detour
+# Subtest: A* and Dijkstra agree on presets
+ok 10 - A* and Dijkstra agree on presets
   ---
-  duration_ms: 3.432735
+  duration_ms: 4.577802
   type: 'test'
   ...
-# Subtest: seeded weighted grids give matching optimal costs
-ok 11 - seeded weighted grids give matching optimal costs
+# Subtest: bidirectional Dijkstra matches Dijkstra on presets
+ok 11 - bidirectional Dijkstra matches Dijkstra on presets
   ---
-  duration_ms: 5.956414
+  duration_ms: 5.100736
+  type: 'test'
+  ...
+# Subtest: bidirectional path cost matches its path
+ok 12 - bidirectional path cost matches its path
+  ---
+  duration_ms: 0.594387
+  type: 'test'
+  ...
+# Subtest: seeded weighted grids keep A* Dijkstra and bidirectional equal
+ok 13 - seeded weighted grids keep A* Dijkstra and bidirectional equal
+  ---
+  duration_ms: 8.674008
+  type: 'test'
+  ...
+# Subtest: diagonal option can shorten an empty route
+ok 14 - diagonal option can shorten an empty route
+  ---
+  duration_ms: 0.312542
+  type: 'test'
+  ...
+# Subtest: A* and Dijkstra agree with diagonals
+ok 15 - A* and Dijkstra agree with diagonals
+  ---
+  duration_ms: 5.872931
+  type: 'test'
+  ...
+# Subtest: bidirectional Dijkstra agrees with diagonals
+ok 16 - bidirectional Dijkstra agrees with diagonals
+  ---
+  duration_ms: 4.676275
+  type: 'test'
+  ...
+# Subtest: BFS minimizes steps even when route cost is higher
+ok 17 - BFS minimizes steps even when route cost is higher
+  ---
+  duration_ms: 0.192961
+  type: 'test'
+  ...
+# Subtest: BFS and weighted search agree on empty unweighted map
+ok 18 - BFS and weighted search agree on empty unweighted map
+  ---
+  duration_ms: 0.34478
+  type: 'test'
+  ...
+# Subtest: random map is deterministic for a seed
+ok 19 - random map is deterministic for a seed
+  ---
+  duration_ms: 0.382136
+  type: 'test'
+  ...
+# Subtest: random map guarantees a route corridor
+ok 20 - random map guarantees a route corridor
+  ---
+  duration_ms: 1.12041
   type: 'test'
   ...
 # Subtest: validate returns an independent cell array
-ok 12 - validate returns an independent cell array
+ok 21 - validate returns an independent cell array
   ---
-  duration_ms: 0.189487
+  duration_ms: 0.089675
   type: 'test'
   ...
 # Subtest: invalid weights cannot create negative-cost shortcuts
-ok 13 - invalid weights cannot create negative-cost shortcuts
+ok 22 - invalid weights cannot create negative-cost shortcuts
   ---
-  duration_ms: 0.392053
+  duration_ms: 0.321054
   type: 'test'
   ...
-# Subtest: invalid dimensions, versions, and blocked endpoints refused
-ok 14 - invalid dimensions, versions, and blocked endpoints refused
+# Subtest: invalid dimensions versions and blocked endpoints refused
+ok 23 - invalid dimensions versions and blocked endpoints refused
   ---
-  duration_ms: 0.267004
+  duration_ms: 0.250338
   type: 'test'
   ...
-# Subtest: unknown algorithms and presets refused
-ok 15 - unknown algorithms and presets refused
+# Subtest: unknown algorithms presets and random bounds refused
+ok 24 - unknown algorithms presets and random bounds refused
   ---
-  duration_ms: 0.151058
+  duration_ms: 0.173772
   type: 'test'
   ...
 # Subtest: ties resolve deterministically
-ok 16 - ties resolve deterministically
+ok 25 - ties resolve deterministically
   ---
-  duration_ms: 0.374257
+  duration_ms: 0.149516
   type: 'test'
   ...
-1..16
-# tests 16
+1..25
+# tests 25
 # suites 0
-# pass 16
+# pass 25
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 74.878991
+# duration_ms 126.457837
