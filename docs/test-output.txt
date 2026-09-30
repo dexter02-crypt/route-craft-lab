@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: empty map shortest entry cost
+ok 1 - empty map shortest entry cost
+  ---
+  duration_ms: 1.219456
+  type: 'test'
+  ...
+# Subtest: start already at goal costs zero
+ok 2 - start already at goal costs zero
+  ---
+  duration_ms: 0.214214
+  type: 'test'
+  ...
+# Subtest: unreachable route explicitly returns null cost
+ok 3 - unreachable route explicitly returns null cost
+  ---
+  duration_ms: 0.87215
+  type: 'test'
+  ...
+# Subtest: cheapest route is not always fewest moves
+ok 4 - cheapest route is not always fewest moves
+  ---
+  duration_ms: 0.156607
+  type: 'test'
+  ...
+# Subtest: entry cost of goal is paid
+ok 5 - entry cost of goal is paid
+  ---
+  duration_ms: 0.112591
+  type: 'test'
+  ...
+# Subtest: wall never appears in a path
+ok 6 - wall never appears in a path
+  ---
+  duration_ms: 1.402082
+  type: 'test'
+  ...
+# Subtest: consecutive path cells share one grid edge
+ok 7 - consecutive path cells share one grid edge
+  ---
+  duration_ms: 0.922967
+  type: 'test'
+  ...
+# Subtest: sum of path entry costs equals reported cost
+ok 8 - sum of path entry costs equals reported cost
+  ---
+  duration_ms: 1.352477
+  type: 'test'
+  ...
+# Subtest: search does not mutate map
+ok 9 - search does not mutate map
+  ---
+  duration_ms: 1.170802
+  type: 'test'
+  ...
+# Subtest: both algorithms agree on warehouse and detour
+ok 10 - both algorithms agree on warehouse and detour
+  ---
+  duration_ms: 3.432735
+  type: 'test'
+  ...
+# Subtest: seeded weighted grids give matching optimal costs
+ok 11 - seeded weighted grids give matching optimal costs
+  ---
+  duration_ms: 5.956414
+  type: 'test'
+  ...
+# Subtest: validate returns an independent cell array
+ok 12 - validate returns an independent cell array
+  ---
+  duration_ms: 0.189487
+  type: 'test'
+  ...
+# Subtest: invalid weights cannot create negative-cost shortcuts
+ok 13 - invalid weights cannot create negative-cost shortcuts
+  ---
+  duration_ms: 0.392053
+  type: 'test'
+  ...
+# Subtest: invalid dimensions, versions, and blocked endpoints refused
+ok 14 - invalid dimensions, versions, and blocked endpoints refused
+  ---
+  duration_ms: 0.267004
+  type: 'test'
+  ...
+# Subtest: unknown algorithms and presets refused
+ok 15 - unknown algorithms and presets refused
+  ---
+  duration_ms: 0.151058
+  type: 'test'
+  ...
+# Subtest: ties resolve deterministically
+ok 16 - ties resolve deterministically
+  ---
+  duration_ms: 0.374257
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 74.878991
